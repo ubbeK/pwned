@@ -1,7 +1,9 @@
 """
-python .\pwned_password.py SomePlainPassword
+Prerequisite:
+    Install Python 3.X from https://www.python.org/downloads/release
 
-Install Python 3.X from https://www.python.org/downloads/release/python-372/
+Usage:
+    python .\pwned_password.py SomePlainPassword
 """
 
 import hashlib
@@ -18,7 +20,7 @@ hex_dig = hash_object.hexdigest()
 
 response = requests.get("https://api.pwnedpasswords.com/range/{0}".format(hex_dig[0:5]))
 
-if str(hex_dig[5::]) in str(response.text).replace("A", "a").replace("B", "b").replace("C", "c").replace("D", "d").replace("E", "e").replace("F", "f"):
-    print("You are fakked! Your password has been pwned by some 1337 HaXXor.")
+if str(hex_dig[5::].upper()) in str(response.text):
+    print("Your password has been pwned by some 1337 HaXXor.")
 else:
     print("OK: Password is fine.")
